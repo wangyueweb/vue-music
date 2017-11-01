@@ -9,11 +9,19 @@ export function getRecommend() {
   // const url = 'https://c.y.qq.com/musichall/fcgi-bin/fcg_yqqhomepagerecommend.fcg'
   const url = 'https://c.y.qq.com/musichall/fcgi-bin/fcg_yqqhomepagerecommend.fcg'
 
+  // clone浅拷贝
   const data = Object.assign({}, commonParams, {
     platform: 'h5',
     uin: 0,
     needNewCode: 1
   })
+
+  // deep clone深拷贝
+  // const data = JSON.parse(JSON.stringify({}, commonParams, {
+  //   platform: 'h5',
+  //   uin: 0,
+  //   needNewCode: 1
+  // }))
   return jsonp(url, data, options)
 }
 
