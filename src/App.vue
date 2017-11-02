@@ -4,7 +4,9 @@
     <m-header></m-header>
     <!-- 导航组件 -->
     <tab></tab>
-    <router-view></router-view>
+    <keep-alive>
+      <router-view></router-view>
+    </keep-alive>
   </div>
 </template>
 
