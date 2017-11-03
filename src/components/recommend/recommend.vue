@@ -12,7 +12,18 @@
       </div>
       <div class="recommend-list">
         <h1 class="list-title">热门歌单推荐</h1>
-        <ul></ul>
+        <ul>
+          <li v-for="(item,index) in distList" :key="index" class="item">
+            <div class="icon">
+              <img width="60" height="60" :src="item.imgurl" alt="">
+            </div>
+            <div class="text">
+              <!-- v-html做转义 -->
+              <h2 class="name" v-html="item.creator.name"></h2>
+              <p class="desc" v-html="item.dissname"></p>
+            </div>
+          </li>
+        </ul>
       </div>
     </div>
   </div>
@@ -22,7 +33,7 @@
   import Slider from 'base/slider/slider'
   // import Loading from 'base/loading/loading'
   // import Scroll from 'base/scroll/scroll'
-  import {getRecommend} from 'api/recommend'
+  import {getRecommend, getDistList} from 'api/recommend'
   // import {playlistMixin} from 'common/js/mixin'
   import {ERR_OK} from 'api/config'
   // import {mapMutations} from 'vuex'
@@ -30,18 +41,28 @@
   export default {
     data() {
       return {
-        recommends: []
+        recommends: [],
+        distList: []
       }
     },
     created() {
       this._getRecommend()
+      this._getDistList()
     },
     methods: {
       _getRecommend() {
         getRecommend().then((res) => {
           if (res.code === ERR_OK) {
             this.recommends = res.data.slider
-            console.log(res.data.slider)
+            // console.log(res.data.slider)
+          }
+        })
+      },
+      _getDistList() {
+        getDistList().then((res) => {
+          if (res.code === ERR_OK) {
+            this.distList = res.data.list
+            console.log(res.data.list)
           }
         })
       }

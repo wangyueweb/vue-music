@@ -1,6 +1,6 @@
 import jsonp from 'common/js/jsonp'
 import {commonParams, options} from './config'
-// import axios from 'axios'
+import axios from 'axios'
 
 // url : https://c.y.qq.com/musichall/fcgi-bin/fcg_yqqhomepagerecommend.fcg
 // data : {}
@@ -46,6 +46,29 @@ export function getRecommend() {
 //     return Promise.resolve(res.data)
 //   })
 // }
+
+export function getDistList() {
+  // const url = 'https://u.y.qq.com/cgi-bin/musicu.fcg'
+  const url = '/api/getDistList'
+
+  const data = Object.assign({}, commonParams, {
+    platform: 'yqq',
+    hostUin: 0,
+    sin: 0,
+    ein: 29,
+    sortId: 5,
+    needNewCode: 0,
+    categoryId: 10000000,
+    rnd: Math.random(),
+    format: 'json' // 返回一个json对象
+  })
+
+  return axios.get(url, {
+    params: data
+  }).then((res) => {
+    return Promise.resolve(res.data)
+  })
+}
 
 // export function getSongList(disstid) {
 //   const url = 'https://c.y.qq.com/qzone/fcg-bin/fcg_ucc_getcdinfo_byids_cp.fcg'

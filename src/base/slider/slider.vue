@@ -56,7 +56,7 @@
     methods: {
       _setSliderWidth(isResize) {
         this.children = this.$refs.sliderGroup.children
-        console.log(this.children)
+        // console.log(this.children)
 
         let width = 0
         let sliderWidth = this.$refs.slider.clientWidth
@@ -92,7 +92,7 @@
           let pageIndex = this.slider.getCurrentPage().pageX
           if (this.loop) {
             pageIndex -= 1
-            console.log(pageIndex)
+            // console.log(pageIndex)
           }
           this.currentPageIndex = pageIndex
 
