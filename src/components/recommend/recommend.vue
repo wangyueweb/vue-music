@@ -1,29 +1,31 @@
 <template>
   <div class="recommend" ref="recommend">
     <div class="recommend-content">
-      <div v-if="recommends.length" class="slider-wrapper">
-        <slider>
-          <div v-for="(item, index) in recommends" :key="index">
-            <a :href="item.linkUrl">
-              <img :src="item.picUrl" alt="">
-            </a>
-          </div>
-        </slider>
-      </div>
-      <div class="recommend-list">
-        <h1 class="list-title">热门歌单推荐</h1>
-        <ul>
-          <li v-for="(item,index) in distList" :key="index" class="item">
-            <div class="icon">
-              <img width="60" height="60" :src="item.imgurl" alt="">
+      <div>
+        <div v-if="recommends.length" class="slider-wrapper">
+          <slider>
+            <div v-for="(item, index) in recommends" :key="index">
+              <a :href="item.linkUrl">
+                <img :src="item.picUrl" alt="">
+              </a>
             </div>
-            <div class="text">
-              <!-- v-html做转义 -->
-              <h2 class="name" v-html="item.creator.name"></h2>
-              <p class="desc" v-html="item.dissname"></p>
-            </div>
-          </li>
-        </ul>
+          </slider>
+        </div>
+        <div class="recommend-list">
+          <h1 class="list-title">热门歌单推荐</h1>
+          <ul>
+            <li v-for="(item,index) in distList" :key="index" class="item">
+              <div class="icon">
+                <img width="60" height="60" :src="item.imgurl" alt="">
+              </div>
+              <div class="text">
+                <!-- v-html做转义 -->
+                <h2 class="name" v-html="item.creator.name"></h2>
+                <p class="desc" v-html="item.dissname"></p>
+              </div>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>
@@ -32,7 +34,7 @@
 <script type="text/ecmascript-6">
   import Slider from 'base/slider/slider'
   // import Loading from 'base/loading/loading'
-  // import Scroll from 'base/scroll/scroll'
+  import Scroll from 'base/scroll/scroll'
   import {getRecommend, getDistList} from 'api/recommend'
   // import {playlistMixin} from 'common/js/mixin'
   import {ERR_OK} from 'api/config'
@@ -68,7 +70,8 @@
       }
     },
     components: {
-      Slider
+      Slider,
+      Scroll
     }
   }
 </script>
