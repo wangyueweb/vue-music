@@ -47,7 +47,7 @@ export function getRecommend() {
 //   })
 // }
 
-export function getDistList() {
+export function getDiscList() {
   // const url = 'https://u.y.qq.com/cgi-bin/musicu.fcg'
   const url = '/api/getDistList'
 

@@ -1,6 +1,6 @@
 <template>
   <div class="recommend" ref="recommend">
-    <div class="recommend-content">
+    <scroll ref="scroll" class="recommend-content" :data="discList">
       <div>
         <div v-if="recommends.length" class="slider-wrapper">
           <slider>
@@ -14,7 +14,7 @@
         <div class="recommend-list">
           <h1 class="list-title">热门歌单推荐</h1>
           <ul>
-            <li v-for="(item,index) in distList" :key="index" class="item">
+            <li v-for="(item,index) in discList" :key="index" class="item">
               <div class="icon">
                 <img width="60" height="60" :src="item.imgurl" alt="">
               </div>
@@ -27,7 +27,7 @@
           </ul>
         </div>
       </div>
-    </div>
+    </scroll>
   </div>
 </template>
 
@@ -35,7 +35,7 @@
   import Slider from 'base/slider/slider'
   // import Loading from 'base/loading/loading'
   import Scroll from 'base/scroll/scroll'
-  import {getRecommend, getDistList} from 'api/recommend'
+  import {getRecommend, getDiscList} from 'api/recommend'
   // import {playlistMixin} from 'common/js/mixin'
   import {ERR_OK} from 'api/config'
   // import {mapMutations} from 'vuex'
@@ -44,12 +44,12 @@
     data() {
       return {
         recommends: [],
-        distList: []
+        discList: []
       }
     },
     created() {
       this._getRecommend()
-      this._getDistList()
+      this._getDiscList()
     },
     methods: {
       _getRecommend() {
@@ -60,11 +60,10 @@
           }
         })
       },
-      _getDistList() {
-        getDistList().then((res) => {
+      _getDiscList() {
+        getDiscList().then((res) => {
           if (res.code === ERR_OK) {
-            this.distList = res.data.list
-            console.log(res.data.list)
+            this.discList = res.data.list
           }
         })
       }
