@@ -6,7 +6,7 @@
           <slider>
             <div v-for="(item, index) in recommends" :key="index">
               <a :href="item.linkUrl">
-                <img :src="item.picUrl" alt="">
+                <img @load="loadImage" :src="item.picUrl" alt="">
               </a>
             </div>
           </slider>
@@ -27,6 +27,7 @@
           </ul>
         </div>
       </div>
+
     </scroll>
   </div>
 </template>
@@ -66,6 +67,13 @@
             this.discList = res.data.list
           }
         })
+      },
+      // 定义一个loadImage方法，使得scroll组件内容能够调用BScroll.refresh()方法
+      loadImage() {
+        if (!this.checkloaded) {
+          this.checkloaded = true
+          this.$refs.scroll.refresh()
+        }
       }
     },
     components: {
