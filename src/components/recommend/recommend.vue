@@ -6,7 +6,7 @@
           <slider>
             <div v-for="(item, index) in recommends" :key="index">
               <a :href="item.linkUrl">
-                <img @load="loadImage" :src="item.picUrl" alt="">
+                <img class="needsclick" @load="loadImage" :src="item.picUrl" alt="">
               </a>
             </div>
           </slider>
@@ -16,7 +16,7 @@
           <ul>
             <li v-for="(item,index) in discList" :key="index" class="item">
               <div class="icon">
-                <img width="60" height="60" :src="item.imgurl" alt="">
+                <img width="60" height="60" v-lazy="item.imgurl" alt="">
               </div>
               <div class="text">
                 <!-- v-html做转义 -->
@@ -27,14 +27,16 @@
           </ul>
         </div>
       </div>
-
+      <div class="loading-container" v-show="!discList.length">
+        <loading></loading>
+      </div>
     </scroll>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
   import Slider from 'base/slider/slider'
-  // import Loading from 'base/loading/loading'
+  import Loading from 'base/loading/loading'
   import Scroll from 'base/scroll/scroll'
   import {getRecommend, getDiscList} from 'api/recommend'
   // import {playlistMixin} from 'common/js/mixin'
@@ -53,6 +55,9 @@
       this._getDiscList()
     },
     methods: {
+      reverseMessage() {
+        this.todos = this.todos.split('').reverse().join('')
+      },
       _getRecommend() {
         getRecommend().then((res) => {
           if (res.code === ERR_OK) {
@@ -78,7 +83,8 @@
     },
     components: {
       Slider,
-      Scroll
+      Scroll,
+      Loading
     }
   }
 </script>
