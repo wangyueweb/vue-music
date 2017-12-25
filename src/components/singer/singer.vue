@@ -28,6 +28,7 @@
         })
       },
       _normallizeSinger(list) {
+        console.log(list)
         let map = {
           hot: {
             title: HOT_NAME,
@@ -36,6 +37,7 @@
         }
         list.forEach((item, index) => {
           if (index < HOT_SINGER_LEN) {
+            console.log(index)
             map.hot.items.push(new Singer({
               name: item.Fsinger_name,
               id: item.Fsinger_mid
@@ -47,14 +49,13 @@
               title: key,
               items: []
             }
-            console.log(map[key])
+            // console.log(map[key])
           }
           map[key].items.push(new Singer({
             name: item.Fsinger_name,
             id: item.Fsinger_mid
           }))
         })
-        console.log(map)
       }
     }
   }
